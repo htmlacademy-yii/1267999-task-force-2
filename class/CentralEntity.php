@@ -1,5 +1,7 @@
 <?php
 
+    namespace Class;
+
     class CentralEntity
     {
         const STATUS_NEW = 'new';
@@ -72,5 +74,6 @@
                     $action = self::ACTION_COMPLETION;
                 }
             }
+            return $action;
         }
     }
