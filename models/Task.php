@@ -85,27 +85,4 @@
                     return null;
             }
         }
-
-
-//        public function getAvailableActions($status, $userId)
-//        {
-//            $action = '';
-//            if ($userId === $this->executorId) {
-//                if ($status === self::STATUS_NEW) {
-//                    $action = self::ACTION_RESPONSE;
-//                } elseif ($status === self::STATUS_WORK) {
-//                    $action = self::ACTION_REFUSAL;
-//                }
-//            } elseif ($userId === $this->customerId) {
-//                if ($status === self::STATUS_NEW) {
-//                    $action = [self::ACTION_RUN, self::ACTION_CANCELED];
-//                } elseif ($status === self::STATUS_WORK) {
-//                    $action = self::ACTION_COMPLETION;
-//                }
-//            }
-//            return $action;
-//        }
     }
-
-
-
