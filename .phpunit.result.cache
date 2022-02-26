@@ -1,0 +1,1 @@
+{"version":1,"defects":{"Warning":6,"CentralEntityTest::testAdd":4,"CentralEntityTest::testGetAvailableActions":3},"times":{"Warning":0.005,"CentralEntityTest::testAdd":0.005,"CentralEntityTest::testTransitionStatus":0.019,"CentralEntityTest::testGetAvailableActions":0}}
