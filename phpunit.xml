@@ -4,7 +4,7 @@
          stopOnFailure="false">
 
   <testsuites>
-    <testsuite name="CentralEntity">
+    <testsuite name="Task">
       <directory>tests</directory>
     </testsuite>
   </testsuites>
