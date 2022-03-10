@@ -51,16 +51,13 @@
         {
             switch ($action) {
                 case self::ACTION_COMPLETION:
-                    return self::STATUS_DONE;
-                    break;
+                    return [self::STATUS_DONE];
                 case self::ACTION_CANCELED:
-                    return self::STATUS_CANCELED;
-                    break;
+                    return [self::STATUS_CANCELED];
                 case self::ACTION_REFUSAL:
-                    return self::STATUS_FAILED;
-                    break;
+                    return [self::STATUS_FAILED];
                 default:
-                    return null;
+                    return [];
             }
         }
 
@@ -69,20 +66,18 @@
             switch ($status) {
                 case self::STATUS_NEW:
                     if ($userId === $this->executorId) {
-                        return self::ACTION_RESPONSE;
+                        return [self::ACTION_RESPONSE];
                     } elseif ($userId === $this->customerId) {
                         return [self::ACTION_RUN, self::ACTION_CANCELED];
                     }
-                    break;
                 case self::STATUS_WORK:
                     if ($userId === $this->executorId) {
-                        return self::ACTION_REFUSAL;
+                        return [self::ACTION_REFUSAL];
                     } elseif ($userId === $this->customerId) {
-                        return self::ACTION_COMPLETION;
+                        return [self::ACTION_COMPLETION];
                     }
-                    break;
                 default:
-                    return null;
+                    return [];
             }
         }
     }
