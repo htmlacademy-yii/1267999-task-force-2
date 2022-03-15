@@ -7,7 +7,8 @@
         public function testTransitionStatus () {
             $executorId = 100;
             $customerId = 50;
-            $centralEntity = new models\Task($executorId, $customerId);
+            $status = 'new';
+            $centralEntity = new models\Task($executorId, $customerId, $status);
             $resultResponse = $centralEntity->transitionStatus($centralEntity::ACTION_RESPONSE);
             $resultCanceled = $centralEntity->transitionStatus($centralEntity::ACTION_CANCELED);
             $resultRun = $centralEntity->transitionStatus($centralEntity::ACTION_RUN);
@@ -23,14 +24,11 @@
         public function testGetAvailableActions () {
             $executorId = 100;
             $customerId = 50;
-            $centralEntity = new models\Task($executorId, $customerId);
-            $resultNew = $centralEntity->getAvailableActions($centralEntity::STATUS_NEW, $centralEntity->executorId);
-            $resultWork = $centralEntity->getAvailableActions($centralEntity::STATUS_WORK, $centralEntity->executorId);
-            $resultNewCustomer = $centralEntity->getAvailableActions($centralEntity::STATUS_NEW, $centralEntity->customerId);
-            $resultWorkCustomer = $centralEntity->getAvailableActions($centralEntity::STATUS_WORK, $centralEntity->customerId);
+            $status = 'new';
+            $centralEntity = new models\Task($executorId, $customerId, $status);
+            $resultNew = $centralEntity->getAvailableActions($centralEntity->executorId);
+            $resultNewCustomer = $centralEntity->getAvailableActions($centralEntity->customerId);
             $this->assertEquals([$centralEntity::ACTION_RESPONSE], $resultNew);
-            $this->assertEquals([$centralEntity::ACTION_REFUSAL], $resultWork);
             $this->assertEquals([$centralEntity::ACTION_RUN,$centralEntity::ACTION_CANCELED], $resultNewCustomer);
-            $this->assertEquals([$centralEntity::ACTION_COMPLETION], $resultWorkCustomer);
         }
     }

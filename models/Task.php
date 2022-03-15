@@ -18,6 +18,7 @@
 
         public $executorId = null;
         public $customerId = null;
+        public $status = null;
 
         private $map = [
             'status' => [
@@ -36,10 +37,11 @@
             ]
         ];
 
-        public function __construct($executorId, $customerId)
+        public function __construct($executorId, $customerId, $status)
         {
             $this->executorId = $executorId;
             $this->customerId = $customerId;
+            $this->status = $status;
         }
 
         public function returnMap()
@@ -61,9 +63,9 @@
             }
         }
 
-        public function getAvailableActions($status, $userId)
+        public function getAvailableActions($userId)
         {
-            switch ($status) {
+            switch ($this->status) {
                 case self::STATUS_NEW:
                     if ($userId === $this->executorId) {
                         return [self::ACTION_RESPONSE];
