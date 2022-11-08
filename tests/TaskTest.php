@@ -3,7 +3,7 @@
     /*
      * vendor/bin/phpunit --testdox / запуск теста
      */
-    class taskTest extends \PHPUnit\Framework\TestCase {
+    class TaskTest extends \PHPUnit\Framework\TestCase {
         public function testTransitionStatus () {
             $executorId = 100;
             $customerId = 50;
