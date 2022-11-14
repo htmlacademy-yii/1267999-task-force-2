@@ -2,14 +2,7 @@
 /*
  * vendor/bin/phpunit --testdox / запуск теста
  */
-use models\BaseTask;
-use models\AbstractAction;
-use models\AcceptAction;
-use models\CanceledAction;
-use models\CompletionAction;
-use models\RefusalAction;
-use models\ResponseAction;
-
+use Models\BaseTask;
 class TaskTest extends \PHPUnit\Framework\TestCase {
     public function testTransitionStatus () {
         $executorId = 100;
@@ -17,11 +10,11 @@ class TaskTest extends \PHPUnit\Framework\TestCase {
         $userId = 50;
         $status = 'new';
         $centralEntity = new BaseTask($executorId, $customerId, $userId, $status);
-        $resultResponse = $centralEntity->transitionStatus($centralEntity->responseAction->returnNameAction(), $centralEntity->completionAction, $centralEntity->canceledAction, $centralEntity->refusalAction);
-        $resultCanceled = $centralEntity->transitionStatus($centralEntity->canceledAction->returnNameAction(), $centralEntity->completionAction, $centralEntity->canceledAction, $centralEntity->refusalAction);
-        $resultAccept = $centralEntity->transitionStatus($centralEntity->acceptAction->returnNameAction(), $centralEntity->completionAction, $centralEntity->canceledAction, $centralEntity->refusalAction);
-        $resultRefusal = $centralEntity->transitionStatus($centralEntity->refusalAction->returnNameAction(), $centralEntity->completionAction, $centralEntity->canceledAction, $centralEntity->refusalAction);
-        $resultCompletion = $centralEntity->transitionStatus($centralEntity->completionAction->returnNameAction(), $centralEntity->completionAction, $centralEntity->canceledAction, $centralEntity->refusalAction);
+        $resultResponse = $centralEntity->transitionStatus($centralEntity->returnResponseAction()->returnNameAction());
+        $resultCanceled = $centralEntity->transitionStatus($centralEntity->returnCanceledAction()->returnNameAction());
+        $resultAccept = $centralEntity->transitionStatus($centralEntity->returnAcceptAction()->returnNameAction());
+        $resultRefusal = $centralEntity->transitionStatus($centralEntity->returnRefusalAction()->returnNameAction());
+        $resultCompletion = $centralEntity->transitionStatus($centralEntity->returnCompletionAction()->returnNameAction());
         $this->assertEquals([], $resultResponse);
         $this->assertEquals([$centralEntity::STATUS_CANCELED], $resultCanceled);
         $this->assertEquals([], $resultAccept);
@@ -35,8 +28,8 @@ class TaskTest extends \PHPUnit\Framework\TestCase {
         $userId = 100;
         $status = 'new';
         $centralEntity = new BaseTask($executorId, $customerId, $userId, $status);
-        $resultNew = $centralEntity->getAvailableActions($centralEntity->userId, $centralEntity->responseAction, $centralEntity->acceptAction, $centralEntity->canceledAction, $centralEntity->refusalAction, $centralEntity->completionAction);
-        $this->assertEquals($centralEntity->responseAction, $resultNew);
+        $resultNew = $centralEntity->getAvailableActions($centralEntity->returnuserId());
+        $this->assertEquals($centralEntity->returnResponseAction(), $resultNew);
     }
 
     public function testGetAvailableActionsCustomer () {
@@ -45,7 +38,7 @@ class TaskTest extends \PHPUnit\Framework\TestCase {
         $userId = 50;
         $status = 'new';
         $centralEntity = new BaseTask($executorId, $customerId, $userId, $status);
-        $resultNewCustomer = $centralEntity->getAvailableActions($centralEntity->userId, $centralEntity->responseAction, $centralEntity->acceptAction, $centralEntity->canceledAction, $centralEntity->refusalAction, $centralEntity->completionAction);
-        $this->assertEquals([$centralEntity->acceptAction, $centralEntity->canceledAction], $resultNewCustomer);
+        $resultNewCustomer = $centralEntity->getAvailableActions($centralEntity->returnuserId());
+        $this->assertEquals([$centralEntity->returnAcceptAction(), $centralEntity->returnCanceledAction()], $resultNewCustomer);
     }
 }

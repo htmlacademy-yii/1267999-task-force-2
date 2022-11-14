@@ -1,6 +1,6 @@
 <?php
 
-namespace models;
+namespace Abstracts;
 
 class RefusalAction extends AbstractAction
 {

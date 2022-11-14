@@ -1,6 +1,6 @@
 <?php
 
-namespace models;
+namespace Abstracts;
 
 class AcceptAction extends AbstractAction
 {

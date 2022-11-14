@@ -1,11 +1,11 @@
 <?php
 
-namespace models;
+namespace Abstracts;
 
-class CompletionAction extends AbstractAction
+class CanceledAction extends AbstractAction
 {
-    const NAME_ACTION = 'completion';
-    const INTERNAL_NAME = 'завершить';
+    const NAME_ACTION = 'canceled';
+    const INTERNAL_NAME = 'отменить';
 
     public function returnNameAction()
     {

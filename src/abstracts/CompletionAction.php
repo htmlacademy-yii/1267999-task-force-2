@@ -1,11 +1,11 @@
 <?php
 
-namespace models;
+namespace Abstracts;
 
-class ResponseAction extends AbstractAction
+class CompletionAction extends AbstractAction
 {
-    const NAME_ACTION = 'response';
-    const INTERNAL_NAME = 'откликнутьcя';
+    const NAME_ACTION = 'completion';
+    const INTERNAL_NAME = 'завершить';
 
     public function returnNameAction()
     {
@@ -19,7 +19,7 @@ class ResponseAction extends AbstractAction
 
     public function rightsVerification($userId)
     {
-        if ($userId === $this->executorId) {
+        if ($userId === $this->customerId) {
             return true;
         }
         return false;
