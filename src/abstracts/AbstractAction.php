@@ -1,12 +1,14 @@
 <?php
 
-namespace Abstracts;
+namespace taskforce\abstracts;
 
 abstract class AbstractAction
 {
-    public $executorId = null;
-    public $customerId = null;
-    public $userId = null;
+    protected $executorId = null;
+    protected $customerId = null;
+    protected $userId = null;
+    protected $nameAction = null;
+    protected $interanlName = null;
 
     public function __construct($executorId, $customerId, $userId)
     {
@@ -14,9 +16,16 @@ abstract class AbstractAction
         $this->customerId = $customerId;
         $this->userId = $userId;
     }
-    abstract public function returnNameAction();
 
-    abstract public function returnInternalName();
+    public function getNameAction()
+    {
+        return $this->nameAction;
+    }
+
+    public function getInternalName()
+    {
+        return $this->interanlName;
+    }
 
     abstract public function rightsVerification($userId);
 }

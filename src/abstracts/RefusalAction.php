@@ -1,11 +1,11 @@
 <?php
 
-namespace Abstracts;
+namespace taskforce\abstracts;
 
 class RefusalAction extends AbstractAction
 {
-    const NAME_ACTION = 'refusal';
-    const INTERNAL_NAME = 'отказаться';
+    protected $nameAction = 'refusal';
+    protected $interanlName = 'отказаться';
 
     public function returnNameAction()
     {

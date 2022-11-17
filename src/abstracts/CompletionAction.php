@@ -1,21 +1,11 @@
 <?php
 
-namespace Abstracts;
+namespace taskforce\abstracts;
 
 class CompletionAction extends AbstractAction
 {
-    const NAME_ACTION = 'completion';
-    const INTERNAL_NAME = 'завершить';
-
-    public function returnNameAction()
-    {
-        return self::NAME_ACTION;
-    }
-
-    public function returnInternalName()
-    {
-        return self::INTERNAL_NAME;
-    }
+    protected $nameAction = 'completion';
+    protected $interanlName = 'завершить';
 
     public function rightsVerification($userId)
     {

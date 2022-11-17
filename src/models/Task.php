@@ -1,13 +1,13 @@
 <?php
 
-namespace Models;
-use Abstracts\AcceptAction;
-use Abstracts\CanceledAction;
-use Abstracts\CompletionAction;
-use Abstracts\RefusalAction;
-use Abstracts\ResponseAction;
+namespace taskforce\models;
+use taskforce\abstracts\AcceptAction;
+use taskforce\abstracts\CanceledAction;
+use taskforce\abstracts\CompletionAction;
+use taskforce\abstracts\RefusalAction;
+use taskforce\abstracts\ResponseAction;
 
-class BaseTask
+class Task
 {
     const STATUS_NEW = 'new';
     const STATUS_CANCELED = 'canceled';
@@ -47,53 +47,51 @@ class BaseTask
                 self::STATUS_FAILED => 'провалено'
             ],
             'action' => [
-                $this->responseAction->returnNameAction() => $this->responseAction->returnInternalName(),
-                $this->canceledAction->returnNameAction() => $this->canceledAction->returnInternalName(),
-                $this->acceptAction->returnNameAction() => $this->acceptAction->returnInternalName(),
-                $this->refusalAction->returnNameAction() => $this->refusalAction->returnInternalName(),
-                $this->completionAction->returnNameAction() => $this->completionAction->returnInternalName()
+                $this->responseAction->getNameAction() => $this->responseAction->getInternalName(),
+                $this->canceledAction->getNameAction() => $this->canceledAction->getInternalName(),
+                $this->acceptAction->getNameAction() => $this->acceptAction->getInternalName(),
+                $this->refusalAction->getNameAction() => $this->refusalAction->getInternalName(),
+                $this->completionAction->getNameAction() => $this->completionAction->getInternalName()
             ]
         ];
     }
 
-    public function returnResponseAction() {
+    public function getResponseAction() {
         return $this->responseAction;
     }
 
-    public function returnCanceledAction() {
+    public function getCanceledAction() {
         return $this->canceledAction;
     }
 
-    public function returnAcceptAction() {
+    public function getAcceptAction() {
         return $this->acceptAction;
     }
 
-    public function returnRefusalAction() {
+    public function getRefusalAction() {
         return $this->refusalAction;
     }
 
-    public function returnCompletionAction() {
+    public function getCompletionAction() {
         return $this->completionAction;
     }
 
-    public function returnuserId() {
+    public function getuserId() {
         return $this->userId;
     }
 
-    public function returnMap() {
+    public function getMap() {
         return $this->map;
     }
-
-
 
     public function transitionStatus($action)
     {
         switch ($action) {
-            case $this->completionAction->returnNameAction():
+            case $this->completionAction->getNameAction():
                 return [self::STATUS_DONE];
-            case $this->canceledAction->returnNameAction():
+            case $this->canceledAction->getNameAction():
                 return [self::STATUS_CANCELED];
-            case $this->refusalAction->returnNameAction():
+            case $this->refusalAction->getNameAction():
                 return [self::STATUS_FAILED];
             default:
                 return [];

@@ -1,21 +1,11 @@
 <?php
 
-namespace Abstracts;
+namespace taskforce\abstracts;
 
 class AcceptAction extends AbstractAction
 {
-    const NAME_ACTION = 'accept';
-    const INTERNAL_NAME = 'принять';
-
-    public function returnNameAction()
-    {
-        return self::NAME_ACTION;
-    }
-
-    public function returnInternalName()
-    {
-        return self::INTERNAL_NAME;
-    }
+    protected $nameAction = 'accept';
+    protected $interanlName = 'принять';
 
     public function rightsVerification($userId)
     {

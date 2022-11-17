@@ -1,21 +1,11 @@
 <?php
 
-namespace Abstracts;
+namespace taskforce\abstracts;
 
 class CanceledAction extends AbstractAction
 {
-    const NAME_ACTION = 'canceled';
-    const INTERNAL_NAME = 'отменить';
-
-    public function returnNameAction()
-    {
-        return self::NAME_ACTION;
-    }
-
-    public function returnInternalName()
-    {
-        return self::INTERNAL_NAME;
-    }
+    protected $nameAction = 'canceled';
+    protected $interanlName = 'отменить';
 
     public function rightsVerification($userId)
     {
