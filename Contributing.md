@@ -18,7 +18,7 @@ git checkout master
 git pull academy master
 
 # Отправьте изменения в ваш форк на Гитхабе
-git push
+git push origin master
 ```
 
 ¹ В `academy` должна быть ссылка на репозиторий Академии. Если его там нет, добавьте:
