@@ -7,7 +7,7 @@ class ResponseAction extends AbstractAction
     protected $nameAction = 'response';
     protected $interanlName = 'откликнутьcя';
 
-    public function rightsVerification($userId)
+    public function rightsVerification(int $userId) : bool
     {
         if ($userId === $this->executorId) {
             return true;

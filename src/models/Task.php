@@ -1,11 +1,13 @@
 <?php
-
+declare(strict_types=1);
 namespace taskforce\models;
 use taskforce\abstracts\AcceptAction;
 use taskforce\abstracts\CanceledAction;
 use taskforce\abstracts\CompletionAction;
 use taskforce\abstracts\RefusalAction;
 use taskforce\abstracts\ResponseAction;
+use taskforce\exception\StatusException;
+use taskforce\exception\UserException;
 
 class Task
 {
@@ -27,7 +29,7 @@ class Task
     protected $status = null;
     protected $map = null;
 
-    public function __construct($executorId, $customerId, $userId, $status)
+    public function __construct(int $executorId, int $customerId, int $userId, string $status)
     {
         $this->executorId = $executorId;
         $this->customerId = $customerId;
@@ -56,35 +58,59 @@ class Task
         ];
     }
 
-    public function getResponseAction() {
+    public function testValue()
+    {
+        if ($this->executorId < 1) {
+            throw new UserException("id исполнителя должно быть больше 0");
+        }
+        if ($this->customerId < 1) {
+            throw new UserException("id заказчика должно быть больше 0");
+        }
+        if ($this->userId < 1) {
+            throw new UserException("id пользователя должно быть больше 0");
+        }
+        if (!array_key_exists($this->status,  $this->map['status'])) {
+            throw new StatusException("Не корректно указан статус");
+        }
+
+    }
+
+    public function getResponseAction() : string
+    {
         return $this->responseAction;
     }
 
-    public function getCanceledAction() {
+    public function getCanceledAction() : string
+    {
         return $this->canceledAction;
     }
 
-    public function getAcceptAction() {
+    public function getAcceptAction() : string
+    {
         return $this->acceptAction;
     }
 
-    public function getRefusalAction() {
+    public function getRefusalAction() : string
+    {
         return $this->refusalAction;
     }
 
-    public function getCompletionAction() {
+    public function getCompletionAction() : string
+    {
         return $this->completionAction;
     }
 
-    public function getuserId() {
+    public function getuserId() : int
+    {
         return $this->userId;
     }
 
-    public function getMap() {
+    public function getMap() : array
+    {
         return $this->map;
     }
 
-    public function transitionStatus($action)
+    public function transitionStatus(string $action) : string
     {
         switch ($action) {
             case $this->completionAction->getNameAction():
@@ -98,7 +124,7 @@ class Task
         }
     }
 
-    public function getAvailableActions($userId)
+    public function getAvailableActions(int $userId) : string
     {
         switch ($this->status) {
             case self::STATUS_NEW:
