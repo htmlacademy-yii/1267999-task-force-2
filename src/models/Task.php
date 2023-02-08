@@ -58,7 +58,7 @@ class Task
         ];
     }
 
-    public function testValue()
+    public function testValue() : void
     {
         if ($this->executorId < 1) {
             throw new UserException("id исполнителя должно быть больше 0");
