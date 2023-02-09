@@ -58,7 +58,7 @@ class Task
         ];
     }
 
-    public function testValue() : void
+    public function testValue(): void
     {
         if ($this->executorId < 1) {
             throw new UserException("id исполнителя должно быть больше 0");
@@ -75,42 +75,42 @@ class Task
 
     }
 
-    public function getResponseAction() : string
+    public function getResponseAction(): object
     {
         return $this->responseAction;
     }
 
-    public function getCanceledAction() : string
+    public function getCanceledAction(): object
     {
         return $this->canceledAction;
     }
 
-    public function getAcceptAction() : string
+    public function getAcceptAction(): object
     {
         return $this->acceptAction;
     }
 
-    public function getRefusalAction() : string
+    public function getRefusalAction(): object
     {
         return $this->refusalAction;
     }
 
-    public function getCompletionAction() : string
+    public function getCompletionAction(): object
     {
         return $this->completionAction;
     }
 
-    public function getuserId() : int
+    public function getuserId(): int
     {
         return $this->userId;
     }
 
-    public function getMap() : array
+    public function getMap(): array
     {
         return $this->map;
     }
 
-    public function transitionStatus(string $action) : string
+    public function transitionStatus(string $action): array
     {
         switch ($action) {
             case $this->completionAction->getNameAction():
@@ -124,7 +124,7 @@ class Task
         }
     }
 
-    public function getAvailableActions(int $userId) : string
+    public function getAvailableActions(int $userId): mixed
     {
         switch ($this->status) {
             case self::STATUS_NEW:

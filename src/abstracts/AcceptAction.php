@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace taskforce\abstracts;
 
 class AcceptAction extends AbstractAction
