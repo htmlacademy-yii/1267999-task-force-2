@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace taskforce\abstracts;
 
 abstract class AbstractAction
@@ -10,22 +10,22 @@ abstract class AbstractAction
     protected $nameAction = null;
     protected $interanlName = null;
 
-    public function __construct($executorId, $customerId, $userId)
+    public function __construct(int $executorId, int $customerId, int $userId)
     {
         $this->executorId = $executorId;
         $this->customerId = $customerId;
         $this->userId = $userId;
     }
 
-    public function getNameAction()
+    public function getNameAction() : string
     {
         return $this->nameAction;
     }
 
-    public function getInternalName()
+    public function getInternalName() : string
     {
         return $this->interanlName;
     }
 
-    abstract public function rightsVerification($userId);
+    abstract public function rightsVerification(int $userId);
 }

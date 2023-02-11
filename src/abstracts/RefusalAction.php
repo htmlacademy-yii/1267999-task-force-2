@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace taskforce\abstracts;
 
 class RefusalAction extends AbstractAction
@@ -8,7 +8,7 @@ class RefusalAction extends AbstractAction
     protected $interanlName = 'отказаться';
 
 
-    public function rightsVerification($userId)
+    public function rightsVerification(int $userId) : bool
     {
         if ($userId === $this->executorId) {
             return true;

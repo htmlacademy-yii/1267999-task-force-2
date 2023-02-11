@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace taskforce\abstracts;
 
 class ResponseAction extends AbstractAction
@@ -7,7 +7,7 @@ class ResponseAction extends AbstractAction
     protected $nameAction = 'response';
     protected $interanlName = 'откликнутьcя';
 
-    public function rightsVerification($userId)
+    public function rightsVerification(int $userId) : bool
     {
         if ($userId === $this->executorId) {
             return true;
