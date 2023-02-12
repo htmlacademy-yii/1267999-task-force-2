@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS `TaskForce`;
 SET @OLD_UNIQUE_CHECKS = @@UNIQUE_CHECKS, UNIQUE_CHECKS = 0;
 SET @OLD_FOREIGN_KEY_CHECKS = @@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS = 0;
 SET @OLD_SQL_MODE = @@SQL_MODE, SQL_MODE =
@@ -61,8 +62,8 @@ CREATE TABLE IF NOT EXISTS `user`
   `failed_orders`  INT           NULL,
   `place_rank`     INT           NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_user_city1_idx` (`city_id` ASC) VISIBLE,
-  INDEX `fk_user_files1_idx` (`avatar_file_id` ASC) VISIBLE,
+  INDEX `fk_user_city1_idx` (`city_id` ASC),
+  INDEX `fk_user_files1_idx` (`avatar_file_id` ASC),
   CONSTRAINT `fk_user_city1`
     FOREIGN KEY (`city_id`)
       REFERENCES `TaskForce`.`city` (`id`)
@@ -109,10 +110,10 @@ CREATE TABLE IF NOT EXISTS `task`
   `created_at`  DATETIME     NOT NULL,
   `adress`      VARCHAR(128) NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_task_category1_idx` (`category_id` ASC) VISIBLE,
-  INDEX `fk_task_city1_idx` (`city_id` ASC) VISIBLE,
-  INDEX `fk_task_files1_idx` (`files_id` ASC) VISIBLE,
-  INDEX `fk_task_user1_idx` (`user_id` ASC) VISIBLE,
+  INDEX `fk_task_category1_idx` (`category_id` ASC),
+  INDEX `fk_task_city1_idx` (`city_id` ASC),
+  INDEX `fk_task_files1_idx` (`files_id` ASC),
+  INDEX `fk_task_user1_idx` (`user_id` ASC),
   CONSTRAINT `fk_task_category1`
     FOREIGN KEY (`category_id`)
       REFERENCES `TaskForce`.`category` (`id`)
@@ -150,8 +151,8 @@ CREATE TABLE IF NOT EXISTS `reviews`
   `rating`      TINYINT      NOT NULL,
   `comment`     VARCHAR(512) NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_reviews_task1_idx` (`task_id` ASC) VISIBLE,
-  INDEX `fk_reviews_user1_idx` (`customer_id` ASC) VISIBLE,
+  INDEX `fk_reviews_task1_idx` (`task_id` ASC),
+  INDEX `fk_reviews_user1_idx` (`customer_id` ASC),
   CONSTRAINT `fk_reviews_task1`
     FOREIGN KEY (`task_id`)
       REFERENCES `TaskForce`.`task` (`id`)
@@ -175,8 +176,8 @@ CREATE TABLE IF NOT EXISTS `user_category`
   `user_id`     INT NOT NULL,
   `category_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_user_category_user1_idx` (`user_id` ASC) VISIBLE,
-  INDEX `fk_user_category_category1_idx` (`category_id` ASC) VISIBLE,
+  INDEX `fk_user_category_user1_idx` (`user_id` ASC),
+  INDEX `fk_user_category_category1_idx` (`category_id` ASC),
   CONSTRAINT `fk_user_category_user1`
     FOREIGN KEY (`user_id`)
       REFERENCES `TaskForce`.`user` (`id`)
