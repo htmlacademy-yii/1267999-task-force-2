@@ -1,0 +1,4 @@
+city_id,name,email,password,rating,created_at,role,birthday,phone,telegram,information,avatar_file_id,done_orders,failed_orders,place_rank
+1,Ваня,111@mail.ru,123,1,2023-02-21 21:02:23,1,1987-07-20,8-937-111-68-68,123,информация 1,1,2,3,4
+2,Павел,222@mail.ru,456,2,2023-02-21 18:02:23,2,1988-07-20,8-999-111-68-68,456,информация 2,2,2,3,5
+3,Андрей,333@mail.ru,789,3,2023-02-21 17:02:23,3,1989-07-20,8-964-111-68-68,789,информация 3,3,2,3,6
