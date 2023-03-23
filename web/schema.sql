@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `files`
 -- -----------------------------------------------------
 -- Table `TaskForce`.`user`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `user`
+CREATE TABLE IF NOT EXISTS `users`
 (
   `id`             INT           NOT NULL AUTO_INCREMENT,
   `city_id`        INT           NOT NULL,

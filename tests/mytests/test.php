@@ -8,7 +8,7 @@ use taskforce\exception\FileFormatException;
 use taskforce\exception\SourceFileException;
 use taskforce\exception\DataBaseException;
 
-require_once '../vendor/autoload.php';
+require_once '../../vendor/autoload.php';
 //try
 //{
 //    $testClass = new Task(1, 1, 1, 'new');
