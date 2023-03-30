@@ -8,7 +8,7 @@ return [
     'category_id' => $faker->numberBetween(1, 8),
     'user_id' => $faker->numberBetween(1, 3),
     'city_id' => $faker->numberBetween(1, 500),
-    'coordinates' => $faker->latitude($min = -90, $max = 90),
+    'coordinates' => $faker->localCoordinates(),
     'status' => $faker->numberBetween(1, 5),
     'name' => $faker->text(80),
     'details' => $faker->text(200),
