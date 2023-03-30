@@ -8,13 +8,13 @@ return [
     'category_id' => $faker->numberBetween(1, 8),
     'user_id' => $faker->numberBetween(1, 3),
     'city_id' => $faker->numberBetween(1, 500),
-    'coordinates' => $faker->numberBetween(1, 5),
+    'coordinates' => $faker->latitude($min = -90, $max = 90),
     'status' => $faker->numberBetween(1, 5),
-    'name' => $faker->numberBetween(0, 10),
-    'details' => $faker->numberBetween(0, 10),
-    'budget' => $faker->numberBetween(0, 10),
-    'deadline' => $faker->numberBetween(0, 10),
-    'files_id' => $faker->numberBetween(0, 10),
-    'created_at' => $faker->numberBetween(0, 10),
-    'adress' => $faker->text(300)
+    'name' => $faker->text(80),
+    'details' => $faker->text(200),
+    'budget' => $faker->numberBetween(0, 20000),
+    'deadline' => $faker->date(),
+    'files_id' => $faker->numberBetween(0, 1000),
+    'created_at' => $faker->date(),
+    'adress' => $faker->streetAddress()
 ];
