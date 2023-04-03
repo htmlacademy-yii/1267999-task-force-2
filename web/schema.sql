@@ -15,9 +15,9 @@ CREATE SCHEMA IF NOT EXISTS `TaskForce` DEFAULT CHARACTER SET utf8;
 USE `TaskForce`;
 
 -- -----------------------------------------------------
--- Table `TaskForce`.`city`
+-- Table `TaskForce`.`cities`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `city`
+CREATE TABLE IF NOT EXISTS `cities`
 (
   `id`          INT          NOT NULL AUTO_INCREMENT,
   `name`        VARCHAR(128) NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `files`
 
 
 -- -----------------------------------------------------
--- Table `TaskForce`.`user`
+-- Table `TaskForce`.`users`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `users`
 (
@@ -62,14 +62,14 @@ CREATE TABLE IF NOT EXISTS `users`
   `failed_orders`  INT           NULL,
   `place_rank`     INT           NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_user_city1_idx` (`city_id` ASC),
-  INDEX `fk_user_files1_idx` (`avatar_file_id` ASC),
-  CONSTRAINT `fk_user_city1`
+  INDEX `fk_users_cities1_idx` (`city_id` ASC),
+  INDEX `fk_users_files1_idx` (`avatar_file_id` ASC),
+  CONSTRAINT `fk_users_cities1`
     FOREIGN KEY (`city_id`)
-      REFERENCES `TaskForce`.`city` (`id`)
+      REFERENCES `TaskForce`.`cities` (`id`)
       ON DELETE NO ACTION
       ON UPDATE CASCADE,
-  CONSTRAINT `fk_user_files1`
+  CONSTRAINT `fk_users_files1`
     FOREIGN KEY (`avatar_file_id`)
       REFERENCES `TaskForce`.`files` (`id`)
       ON DELETE NO ACTION
@@ -79,9 +79,9 @@ CREATE TABLE IF NOT EXISTS `users`
 
 
 -- -----------------------------------------------------
--- Table `TaskForce`.`category`
+-- Table `TaskForce`.`categories`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `category`
+CREATE TABLE IF NOT EXISTS `categories`
 (
   `id`   INT          NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(128) NOT NULL,
@@ -92,9 +92,9 @@ CREATE TABLE IF NOT EXISTS `category`
 
 
 -- -----------------------------------------------------
--- Table `TaskForce`.`task`
+-- Table `TaskForce`.`tasks`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `task`
+CREATE TABLE IF NOT EXISTS `tasks`
 (
   `id`          INT          NOT NULL AUTO_INCREMENT,
   `category_id` INT          NOT NULL,
@@ -106,32 +106,32 @@ CREATE TABLE IF NOT EXISTS `task`
   `details`     VARCHAR(512) NOT NULL,
   `budget`      INT          NULL,
   `deadline`    DATE         NOT NULL,
-  `files_id`    INT          NOT NULL,
+  `file_id`    INT          NOT NULL,
   `created_at`  DATETIME     NOT NULL,
-  `adress`      VARCHAR(128) NULL,
+  `address`      VARCHAR(128) NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_task_category1_idx` (`category_id` ASC),
-  INDEX `fk_task_city1_idx` (`city_id` ASC),
-  INDEX `fk_task_files1_idx` (`files_id` ASC),
-  INDEX `fk_task_user1_idx` (`user_id` ASC),
-  CONSTRAINT `fk_task_category1`
+  INDEX `fk_tasks_categories1_idx` (`category_id` ASC),
+  INDEX `fk_tasks_cities1_idx` (`city_id` ASC),
+  INDEX `fk_tasks_files1_idx` (`file_id` ASC),
+  INDEX `fk_tasks_users1_idx` (`user_id` ASC),
+  CONSTRAINT `fk_tasks_categories1`
     FOREIGN KEY (`category_id`)
-      REFERENCES `TaskForce`.`category` (`id`)
+      REFERENCES `TaskForce`.`categories` (`id`)
       ON DELETE NO ACTION
       ON UPDATE CASCADE,
-  CONSTRAINT `fk_task_city1`
+  CONSTRAINT `fk_tasks_cities1`
     FOREIGN KEY (`city_id`)
-      REFERENCES `TaskForce`.`city` (`id`)
+      REFERENCES `TaskForce`.`cities` (`id`)
       ON DELETE NO ACTION
       ON UPDATE CASCADE,
-  CONSTRAINT `fk_task_files1`
-    FOREIGN KEY (`files_id`)
+  CONSTRAINT `fk_tasks_files1`
+    FOREIGN KEY (`file_id`)
       REFERENCES `TaskForce`.`files` (`id`)
       ON DELETE NO ACTION
       ON UPDATE NO ACTION,
-  CONSTRAINT `fk_task_user1`
+  CONSTRAINT `fk_tasks_users1`
     FOREIGN KEY (`user_id`)
-      REFERENCES `TaskForce`.`user` (`id`)
+      REFERENCES `TaskForce`.`users` (`id`)
       ON DELETE NO ACTION
       ON UPDATE NO ACTION
 )
@@ -151,16 +151,16 @@ CREATE TABLE IF NOT EXISTS `reviews`
   `rating`      TINYINT      NOT NULL,
   `comment`     VARCHAR(512) NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_reviews_task1_idx` (`task_id` ASC),
-  INDEX `fk_reviews_user1_idx` (`customer_id` ASC),
-  CONSTRAINT `fk_reviews_task1`
+  INDEX `fk_reviews_tasks1_idx` (`task_id` ASC),
+  INDEX `fk_reviews_users1_idx` (`customer_id` ASC),
+  CONSTRAINT `fk_reviews_tasks1`
     FOREIGN KEY (`task_id`)
-      REFERENCES `TaskForce`.`task` (`id`)
+      REFERENCES `TaskForce`.`tasks` (`id`)
       ON DELETE NO ACTION
       ON UPDATE NO ACTION,
-  CONSTRAINT `fk_reviews_user1`
+  CONSTRAINT `fk_reviews_users1`
     FOREIGN KEY (`customer_id`)
-      REFERENCES `TaskForce`.`user` (`id`)
+      REFERENCES `TaskForce`.`users` (`id`)
       ON DELETE NO ACTION
       ON UPDATE NO ACTION
 )
@@ -168,29 +168,40 @@ CREATE TABLE IF NOT EXISTS `reviews`
 
 
 -- -----------------------------------------------------
--- Table `TaskForce`.`user_category`
+-- Table `TaskForce`.`users_categories`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `user_category`
+CREATE TABLE IF NOT EXISTS `users_categories`
 (
   `id`          INT NOT NULL AUTO_INCREMENT,
   `user_id`     INT NOT NULL,
   `category_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_user_category_user1_idx` (`user_id` ASC),
-  INDEX `fk_user_category_category1_idx` (`category_id` ASC),
-  CONSTRAINT `fk_user_category_user1`
-    FOREIGN KEY (`user_id`)
-      REFERENCES `TaskForce`.`user` (`id`)
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION,
-  CONSTRAINT `fk_user_category_category1`
+  INDEX `fk_users_categories_users1_idx` (`user_id` ASC),
+  INDEX `fk_users_categories_categories1_idx` (`category_id` ASC),
+#   CONSTRAINT `fk_users_categories_users1`
+#     FOREIGN KEY (`user_id`)
+#       REFERENCES `TaskForce`.`users` (`id`)
+#       ON DELETE NO ACTION
+#       ON UPDATE NO ACTION,
+  CONSTRAINT `fk_users_categories_categories1`
     FOREIGN KEY (`category_id`)
-      REFERENCES `TaskForce`.`category` (`id`)
+      REFERENCES `TaskForce`.`categories` (`id`)
       ON DELETE NO ACTION
       ON UPDATE NO ACTION
 )
   ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `TaskForce`.`migration`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `migration`
+(
+    `id`   INT          NOT NULL AUTO_INCREMENT,
+    `version` VARCHAR(128) NOT NULL,
+    `apply_time` INT NOT NULL,
+    PRIMARY KEY (`id`)
+    )
+    ENGINE = InnoDB;
 
 SET SQL_MODE = @OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS = @OLD_FOREIGN_KEY_CHECKS;

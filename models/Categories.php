@@ -5,24 +5,23 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "city".
+ * This is the model class for table "categories".
  *
  * @property int $id
  * @property string $name
  * @property string $code
- * @property string|null $coordinates
  *
- * @property Task[] $tasks
- * @property User[] $users
+ * @property Tasks[] $tasks
+ * @property UsersCategories[] $usersCategories
  */
-class City extends \yii\db\ActiveRecord
+class Categories extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'city';
+        return 'categories';
     }
 
     /**
@@ -32,7 +31,6 @@ class City extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'code'], 'required'],
-            [['coordinates'], 'string'],
             [['name', 'code'], 'string', 'max' => 128],
         ];
     }
@@ -46,36 +44,35 @@ class City extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Name',
             'code' => 'Code',
-            'coordinates' => 'Coordinates',
         ];
     }
 
     /**
      * Gets query for [[Tasks]].
      *
-     * @return \yii\db\ActiveQuery|TaskQuery
+     * @return \yii\db\ActiveQuery|TasksQuery
      */
     public function getTasks()
     {
-        return $this->hasMany(Task::class, ['city_id' => 'id']);
+        return $this->hasMany(Tasks::class, ['category_id' => 'id']);
     }
 
     /**
-     * Gets query for [[Users]].
+     * Gets query for [[UsersCategories]].
      *
-     * @return \yii\db\ActiveQuery|UserQuery
+     * @return \yii\db\ActiveQuery|UsersCategoriesQuery
      */
-    public function getUsers()
+    public function getUsersCategories()
     {
-        return $this->hasMany(User::class, ['city_id' => 'id']);
+        return $this->hasMany(UsersCategories::class, ['category_id' => 'id']);
     }
 
     /**
      * {@inheritdoc}
-     * @return CityQuery the active query used by this AR class.
+     * @return CategoriesQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new CityQuery(get_called_class());
+        return new CategoriesQuery(get_called_class());
     }
 }

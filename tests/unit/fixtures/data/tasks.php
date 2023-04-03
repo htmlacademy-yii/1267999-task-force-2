@@ -1,0 +1,43 @@
+<?php
+
+return [
+    'tasks0' => [
+        'category_id' => 5,
+        'user_id' => 2,
+        'city_id' => 33,
+        'status' => 2,
+        'name' => 'Ipsam est nesciunt veritatis animi architecto aut.',
+        'details' => 'Recusandae aliquid voluptates vitae aut hic. Laborum sunt voluptas ipsa aperiam ut mollitia porro. Fugit corporis eos expedita qui.',
+        'budget' => 9087,
+        'deadline' => '1987-07-04',
+        'file_id' => 779,
+        'created_at' => '2008-11-23',
+        'address' => '5761 Reilly Vista',
+    ],
+    'tasks1' => [
+        'category_id' => 5,
+        'user_id' => 3,
+        'city_id' => 376,
+        'status' => 2,
+        'name' => 'Porro sed rerum omnis error ea et.',
+        'details' => 'Rerum libero veniam ab consectetur enim voluptatem voluptatem. At sunt quia adipisci dolore temporibus sint. Qui eos dicta quidem distinctio omnis expedita voluptate.',
+        'budget' => 8685,
+        'deadline' => '2015-02-16',
+        'file_id' => 532,
+        'created_at' => '1992-06-19',
+        'address' => '5251 Jacklyn Station Apt. 580',
+    ],
+    'tasks2' => [
+        'category_id' => 6,
+        'user_id' => 3,
+        'city_id' => 219,
+        'status' => 4,
+        'name' => 'Sit nulla sapiente quasi. Sed facilis vitae optio fuga aut repellat illum.',
+        'details' => 'Et vel qui voluptatibus et sed. Sed quia aperiam ducimus harum.',
+        'budget' => 12237,
+        'deadline' => '2020-02-12',
+        'file_id' => 81,
+        'created_at' => '1999-04-26',
+        'address' => '69333 Willa Mountain',
+    ],
+];

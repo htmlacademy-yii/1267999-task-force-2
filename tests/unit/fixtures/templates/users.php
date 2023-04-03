@@ -11,7 +11,7 @@ return [
     'password' => $faker->password(),
     'rating' => $faker->numberBetween(1, 9),
     'created_at' => $faker->date(),
-    'role' => $faker->numberBetween(0, 1000000),
+    'role' => $faker->numberBetween(0, 99),
     'birthday' => $faker->date(),
     'phone' => $faker->e164PhoneNumber(),
     'telegram' => $faker->phoneNumber(),

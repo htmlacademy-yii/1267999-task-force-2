@@ -3,11 +3,11 @@
 namespace app\models;
 
 /**
- * This is the ActiveQuery class for [[UsersCategory]].
+ * This is the ActiveQuery class for [[Tasks]].
  *
- * @see UsersCategory
+ * @see Tasks
  */
-class UsersCategoryQuery extends \yii\db\ActiveQuery
+class TasksQuery extends \yii\db\ActiveQuery
 {
     /*public function active()
     {
@@ -16,7 +16,7 @@ class UsersCategoryQuery extends \yii\db\ActiveQuery
 
     /**
      * {@inheritdoc}
-     * @return UsersCategory[]|array
+     * @return Tasks[]|array
      */
     public function all($db = null)
     {
@@ -25,7 +25,7 @@ class UsersCategoryQuery extends \yii\db\ActiveQuery
 
     /**
      * {@inheritdoc}
-     * @return UsersCategory|array|null
+     * @return Tasks|array|null
      */
     public function one($db = null)
     {

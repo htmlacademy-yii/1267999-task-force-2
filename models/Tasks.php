@@ -5,7 +5,7 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "task".
+ * This is the model class for table "tasks".
  *
  * @property int $id
  * @property int $category_id
@@ -17,24 +17,24 @@ use Yii;
  * @property string $details
  * @property int|null $budget
  * @property string $deadline
- * @property int $files_id
+ * @property int $file_id
  * @property string $created_at
- * @property string|null $adress
+ * @property string|null $address
  *
- * @property Category $category
- * @property City $city
- * @property Files $files
+ * @property Categories $category
+ * @property Cities $city
+ * @property Files $file
  * @property Reviews[] $reviews
- * @property User $user
+ * @property Users $user
  */
-class Task extends \yii\db\ActiveRecord
+class Tasks extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'task';
+        return 'tasks';
     }
 
     /**
@@ -43,16 +43,16 @@ class Task extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'user_id', 'status', 'name', 'details', 'deadline', 'files_id', 'created_at'], 'required'],
-            [['category_id', 'user_id', 'city_id', 'status', 'budget', 'files_id'], 'integer'],
+            [['category_id', 'user_id', 'status', 'name', 'details', 'deadline', 'file_id', 'created_at'], 'required'],
+            [['category_id', 'user_id', 'city_id', 'status', 'budget', 'file_id'], 'integer'],
             [['coordinates'], 'string'],
             [['deadline', 'created_at'], 'safe'],
-            [['name', 'adress'], 'string', 'max' => 128],
+            [['name', 'address'], 'string', 'max' => 128],
             [['details'], 'string', 'max' => 512],
-            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::class, 'targetAttribute' => ['category_id' => 'id']],
-            [['city_id'], 'exist', 'skipOnError' => true, 'targetClass' => City::class, 'targetAttribute' => ['city_id' => 'id']],
-            [['files_id'], 'exist', 'skipOnError' => true, 'targetClass' => Files::class, 'targetAttribute' => ['files_id' => 'id']],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
+            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::class, 'targetAttribute' => ['category_id' => 'id']],
+            [['city_id'], 'exist', 'skipOnError' => true, 'targetClass' => Cities::class, 'targetAttribute' => ['city_id' => 'id']],
+            [['file_id'], 'exist', 'skipOnError' => true, 'targetClass' => Files::class, 'targetAttribute' => ['file_id' => 'id']],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
@@ -72,40 +72,40 @@ class Task extends \yii\db\ActiveRecord
             'details' => 'Details',
             'budget' => 'Budget',
             'deadline' => 'Deadline',
-            'files_id' => 'Files ID',
+            'file_id' => 'File ID',
             'created_at' => 'Created At',
-            'adress' => 'Adress',
+            'address' => 'Address',
         ];
     }
 
     /**
      * Gets query for [[Category]].
      *
-     * @return \yii\db\ActiveQuery|CategoryQuery
+     * @return \yii\db\ActiveQuery|CategoriesQuery
      */
     public function getCategory()
     {
-        return $this->hasOne(Category::class, ['id' => 'category_id']);
+        return $this->hasOne(Categories::class, ['id' => 'category_id']);
     }
 
     /**
      * Gets query for [[City]].
      *
-     * @return \yii\db\ActiveQuery|CityQuery
+     * @return \yii\db\ActiveQuery|CitiesQuery
      */
     public function getCity()
     {
-        return $this->hasOne(City::class, ['id' => 'city_id']);
+        return $this->hasOne(Cities::class, ['id' => 'city_id']);
     }
 
     /**
-     * Gets query for [[Files]].
+     * Gets query for [[File]].
      *
      * @return \yii\db\ActiveQuery|FilesQuery
      */
-    public function getFiles()
+    public function getFile()
     {
-        return $this->hasOne(Files::class, ['id' => 'files_id']);
+        return $this->hasOne(Files::class, ['id' => 'file_id']);
     }
 
     /**
@@ -121,19 +121,19 @@ class Task extends \yii\db\ActiveRecord
     /**
      * Gets query for [[User]].
      *
-     * @return \yii\db\ActiveQuery|UserQuery
+     * @return \yii\db\ActiveQuery|UsersQuery
      */
     public function getUser()
     {
-        return $this->hasOne(User::class, ['id' => 'user_id']);
+        return $this->hasOne(Users::class, ['id' => 'user_id']);
     }
 
     /**
      * {@inheritdoc}
-     * @return TaskQuery the active query used by this AR class.
+     * @return TasksQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new TaskQuery(get_called_class());
+        return new TasksQuery(get_called_class());
     }
 }
