@@ -10,8 +10,8 @@ use Yii;
  * @property int $id
  * @property string|null $path
  *
- * @property Task[] $tasks
- * @property User[] $users
+ * @property Tasks[] $tasks
+ * @property Users[] $users
  */
 class Files extends \yii\db\ActiveRecord
 {
@@ -47,21 +47,21 @@ class Files extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Tasks]].
      *
-     * @return \yii\db\ActiveQuery|TaskQuery
+     * @return \yii\db\ActiveQuery|TasksQuery
      */
     public function getTasks()
     {
-        return $this->hasMany(Task::class, ['files_id' => 'id']);
+        return $this->hasMany(Tasks::class, ['file_id' => 'id']);
     }
 
     /**
      * Gets query for [[Users]].
      *
-     * @return \yii\db\ActiveQuery|UserQuery
+     * @return \yii\db\ActiveQuery|UsersQuery
      */
     public function getUsers()
     {
-        return $this->hasMany(User::class, ['avatar_file_id' => 'id']);
+        return $this->hasMany(Users::class, ['avatar_file_id' => 'id']);
     }
 
     /**

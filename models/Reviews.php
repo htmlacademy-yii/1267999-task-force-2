@@ -15,8 +15,8 @@ use Yii;
  * @property int $rating
  * @property string|null $comment
  *
- * @property User $customer
- * @property Task $task
+ * @property Users $customer
+ * @property Tasks $task
  */
 class Reviews extends \yii\db\ActiveRecord
 {
@@ -38,8 +38,8 @@ class Reviews extends \yii\db\ActiveRecord
             [['task_id', 'customer_id', 'executor_id', 'rating'], 'integer'],
             [['created_at'], 'safe'],
             [['comment'], 'string', 'max' => 512],
-            [['task_id'], 'exist', 'skipOnError' => true, 'targetClass' => Task::class, 'targetAttribute' => ['task_id' => 'id']],
-            [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['customer_id' => 'id']],
+            [['task_id'], 'exist', 'skipOnError' => true, 'targetClass' => Tasks::class, 'targetAttribute' => ['task_id' => 'id']],
+            [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::class, 'targetAttribute' => ['customer_id' => 'id']],
         ];
     }
 
@@ -62,21 +62,21 @@ class Reviews extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Customer]].
      *
-     * @return \yii\db\ActiveQuery|UserQuery
+     * @return \yii\db\ActiveQuery|UsersQuery
      */
     public function getCustomer()
     {
-        return $this->hasOne(User::class, ['id' => 'customer_id']);
+        return $this->hasOne(Users::class, ['id' => 'customer_id']);
     }
 
     /**
      * Gets query for [[Task]].
      *
-     * @return \yii\db\ActiveQuery|TaskQuery
+     * @return \yii\db\ActiveQuery|TasksQuery
      */
     public function getTask()
     {
-        return $this->hasOne(Task::class, ['id' => 'task_id']);
+        return $this->hasOne(Tasks::class, ['id' => 'task_id']);
     }
 
     /**

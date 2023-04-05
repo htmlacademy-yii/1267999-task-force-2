@@ -25,7 +25,10 @@ use Yii;
  * @property int|null $place_rank
  *
  * @property Files $avatarFile
- * @property City $city
+ * @property Cities $city
+ * @property Reviews[] $reviews
+ * @property Tasks[] $tasks
+ * @property UsersCategories[] $usersCategories
  */
 class Users extends \yii\db\ActiveRecord
 {
@@ -50,7 +53,7 @@ class Users extends \yii\db\ActiveRecord
             [['name', 'email', 'telegram'], 'string', 'max' => 128],
             [['password', 'phone'], 'string', 'max' => 64],
             [['information'], 'string', 'max' => 1024],
-            [['city_id'], 'exist', 'skipOnError' => true, 'targetClass' => City::class, 'targetAttribute' => ['city_id' => 'id']],
+            [['city_id'], 'exist', 'skipOnError' => true, 'targetClass' => Cities::class, 'targetAttribute' => ['city_id' => 'id']],
             [['avatar_file_id'], 'exist', 'skipOnError' => true, 'targetClass' => Files::class, 'targetAttribute' => ['avatar_file_id' => 'id']],
         ];
     }
@@ -93,11 +96,41 @@ class Users extends \yii\db\ActiveRecord
     /**
      * Gets query for [[City]].
      *
-     * @return \yii\db\ActiveQuery|CityQuery
+     * @return \yii\db\ActiveQuery|CitiesQuery
      */
     public function getCity()
     {
-        return $this->hasOne(City::class, ['id' => 'city_id']);
+        return $this->hasOne(Cities::class, ['id' => 'city_id']);
+    }
+
+    /**
+     * Gets query for [[Reviews]].
+     *
+     * @return \yii\db\ActiveQuery|ReviewsQuery
+     */
+    public function getReviews()
+    {
+        return $this->hasMany(Reviews::class, ['customer_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Tasks]].
+     *
+     * @return \yii\db\ActiveQuery|TasksQuery
+     */
+    public function getTasks()
+    {
+        return $this->hasMany(Tasks::class, ['user_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[UsersCategories]].
+     *
+     * @return \yii\db\ActiveQuery|UsersCategoriesQuery
+     */
+    public function getUsersCategories()
+    {
+        return $this->hasMany(UsersCategories::class, ['user_id' => 'id']);
     }
 
     /**
