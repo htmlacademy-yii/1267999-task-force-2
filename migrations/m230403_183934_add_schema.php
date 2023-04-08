@@ -12,7 +12,7 @@ class m230403_183934_add_schema extends Migration
      */
     public function safeUp()
     {
-        $this->execute(file_get_contents('./web/schema.sql', true));
+        $this->execute(file_get_contents('./schema.sql', true));
     }
 
     /**
