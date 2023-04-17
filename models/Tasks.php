@@ -1,8 +1,7 @@
 <?php
-
 namespace app\models;
-
-use Yii;
+use yii\data\ActiveDataProvider;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "tasks".
@@ -27,8 +26,22 @@ use Yii;
  * @property Reviews[] $reviews
  * @property Users $user
  */
-class Tasks extends \yii\db\ActiveRecord
+class Tasks extends ActiveRecord
 {
+    public $withoutexecutor;
+    public $search;
+    public $period;
+
+    public function search($params)
+    {
+        $query = self::find();
+        $dataProvider = new ActiveDataProvider(['query' => $query]);
+        $this->load($params);
+        $query->filterWhere(['category_id' => $this->category_id]);
+        return $dataProvider;
+    }
+
+
     /**
      * {@inheritdoc}
      */

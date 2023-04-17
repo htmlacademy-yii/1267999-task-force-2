@@ -1,8 +1,6 @@
 <?php
-
 namespace app\models;
-
-use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "categories".
@@ -14,7 +12,7 @@ use Yii;
  * @property Tasks[] $tasks
  * @property UsersCategories[] $usersCategories
  */
-class Categories extends \yii\db\ActiveRecord
+class Categories extends ActiveRecord
 {
     /**
      * {@inheritdoc}

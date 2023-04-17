@@ -1,8 +1,6 @@
 <?php
-
 namespace app\models;
-
-use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "cities".
@@ -15,7 +13,7 @@ use Yii;
  * @property Tasks[] $tasks
  * @property Users[] $users
  */
-class Cities extends \yii\db\ActiveRecord
+class Cities extends ActiveRecord
 {
     /**
      * {@inheritdoc}

@@ -1,13 +1,13 @@
 <?php
-
 namespace app\models;
+use yii\db\ActiveQuery;
 
 /**
  * This is the ActiveQuery class for [[Migration]].
  *
  * @see Migration
  */
-class MigrationQuery extends \yii\db\ActiveQuery
+class MigrationQuery extends ActiveQuery
 {
     /*public function active()
     {

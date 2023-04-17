@@ -77,14 +77,12 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         </div>
     </div>
 </header>
-<main id="main" class="main-content main-content--center container" role="main">
-    <div class="add-task-form regular-form">
-        <?php if (!empty($this->params['breadcrumbs'])): ?>
-            <?= Breadcrumbs::widget(['links' => $this->params['breadcrumbs']]) ?>
-        <?php endif ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
-    </div>
+<main id="main" class="main-content container" role="main">
+    <?php if (!empty($this->params['breadcrumbs'])): ?>
+        <?= Breadcrumbs::widget(['links' => $this->params['breadcrumbs']]) ?>
+    <?php endif ?>
+    <?= Alert::widget() ?>
+    <?= $content ?>
 </main>
 
 <footer id="footer" class="mt-auto py-3 bg-light">

@@ -369,7 +369,10 @@ template {
   cursor: pointer; }
 
 .button--blue {
-  background-color: #4d38f5; }
+  background-color: #4d38f5;
+  margin-left: auto;
+  display: block;
+  padding: 15px 40px;}
   .button--blue:hover {
     background-color: #4130cc; }
 
@@ -1206,7 +1209,7 @@ select {
 
 .search-form select {
   margin-top: 20px;
-  width: 100%;
+  width: 110%;
   padding: 13px 16px;
   margin-bottom: 25px;
   font-size: 15px;
@@ -1583,5 +1586,9 @@ form .has-error textarea:hover {
 
 .pop-up--open {
   display: block; }
+
+.search-form .form-group {
+  max-width: 180px;
+}
 
 /*# sourceMappingURL=style.css.map */
