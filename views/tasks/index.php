@@ -1,9 +1,11 @@
 <?php
 use yii\helpers\Html;
-use app\controllers\TasksController;
 use taskforce\utils\DateConversion;
+use yii\widgets\ActiveForm;
+use yii\widgets\ActiveField;
 $this->title = 'Tasks';
 /* @var $tasks app\controllers\TasksController */
+/* @var $model \app\models\Filters */
 ?>
 <div class="left-column">
     <h3 class="head-main head-task">Новые задания</h3>
@@ -45,6 +47,10 @@ $this->title = 'Tasks';
 <div class="right-column">
     <div class="right-card black">
         <div class="search-form">
+            <?php $form = ActiveForm::begin(); ?>
+<!--            --><?php //echo $form->field($model, 'category')->checkboxList(['services', 'cargo', 'translate']); ?>
+            <button class="button button--blue" type="submit"><span>Искать</span></button>
+            <?php ActiveForm::end(); ?>
             <form>
                 <h4 class="head-card">Категории</h4>
                 <div class="form-group">

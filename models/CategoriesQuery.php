@@ -1,13 +1,13 @@
 <?php
-
 namespace app\models;
+use yii\db\ActiveQuery;
 
 /**
  * This is the ActiveQuery class for [[Categories]].
  *
  * @see Categories
  */
-class CategoriesQuery extends \yii\db\ActiveQuery
+class CategoriesQuery extends ActiveQuery
 {
     /*public function active()
     {

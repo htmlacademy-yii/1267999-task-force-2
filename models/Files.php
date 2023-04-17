@@ -1,8 +1,6 @@
 <?php
-
 namespace app\models;
-
-use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "files".
@@ -13,7 +11,7 @@ use Yii;
  * @property Tasks[] $tasks
  * @property Users[] $users
  */
-class Files extends \yii\db\ActiveRecord
+class Files extends ActiveRecord
 {
     /**
      * {@inheritdoc}
