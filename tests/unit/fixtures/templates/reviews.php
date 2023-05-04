@@ -6,9 +6,9 @@
 
 return [
     'task_id' => $faker->numberBetween(0, 100),
-    'customer_id' => $faker->numberBetween(0, 100),
+    'customer_id' => $faker->numberBetween(0, 10),
     'created_at' => $faker->date(),
-    'executor_id' => $faker->numberBetween(0, 100),
+    'executor_id' => $faker->numberBetween(0, 10),
     'rating' => $faker->numberBetween(0, 10),
     'comment' => $faker->text(300)
 ];

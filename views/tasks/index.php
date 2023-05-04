@@ -5,7 +5,6 @@ use yii\widgets\ActiveForm;
 use yii\widgets\ActiveField;
 $this->title = 'Tasks';
 /* @var $tasks app\controllers\TasksController */
-/* @var $model \app\models\Filters */
 ?>
 <div class="left-column">
     <h3 class="head-main head-task">Новые задания</h3>
@@ -19,7 +18,7 @@ $this->title = 'Tasks';
             <p class="task-text"><?= $task['details']; ?></p>
             <div class="footer-task">
                 <p class="info-text town-text"><?= $task['address']; ?></p>
-                <p class="info-text category-text"><?= $task['category']['name']; ?></p>
+                <p class="info-text category-text"><?= $task['category']; ?></p>
                 <a href="#" class="button button--black">Смотреть Задание</a>
             </div>
         </div>
@@ -47,38 +46,73 @@ $this->title = 'Tasks';
 <div class="right-column">
     <div class="right-card black">
         <div class="search-form">
-            <?php $form = ActiveForm::begin(); ?>
-<!--            --><?php //echo $form->field($model, 'category')->checkboxList(['services', 'cargo', 'translate']); ?>
+            <?php $form = ActiveForm::begin([
+                'id' => 'form-filter',
+                'method' => 'post',
+                'fieldConfig' => [
+                    'template' => "{input}",
+                ],
+            ]); ?>
+            <h4 class="head-card">Категории</h4>
+            <?php echo $form->field($filtersCategoriesIds, 'categories')->label(false)->checkboxList($filtersCategoriesIds->getLabelCategories(),
+            [
+                'class' => 'checkbox-wrapper',
+                'itemOptions' => [
+                    'labelOptions' => [
+                        'class' => 'control-label',
+                    ],
+                ],
+            ]); ?>
+            <h4 class="head-card">Дополнительно</h4>
+            <?php echo $form->field($filtersCategoriesIds, 'withoutPerformer')->checkbox(
+                [
+                    'id' => 'without-performer',
+                    'labelOptions' => [
+                        'class' => 'control-label',
+                    ],
+                ]
+            ); ?>
+            <h4 class="head-card">Период</h4>
+            <?php echo $form->field($filtersCategoriesIds, 'period')->label(false)->dropDownList($filtersCategoriesIds->getPeriods(),
+                [
+                    'class' => 'checkbox-wrapper',
+                    'itemOptions' => [
+                        'labelOptions' => [
+                            'class' => 'control-label',
+                        ],
+                    ],
+                ]); ?>
+
             <button class="button button--blue" type="submit"><span>Искать</span></button>
             <?php ActiveForm::end(); ?>
-            <form>
-                <h4 class="head-card">Категории</h4>
-                <div class="form-group">
-                    <div>
-                        <input type="checkbox" id="сourier-services" checked>
-                        <label class="control-label" for="сourier-services">Курьерские услуги</label>
-                        <input id="cargo-transportation" type="checkbox">
-                        <label class="control-label" for="cargo-transportation">Грузоперевозки</label>
-                        <input id="translations" type="checkbox">
-                        <label class="control-label" for="translations">Переводы</label>
-                    </div>
-                </div>
-                <h4 class="head-card">Дополнительно</h4>
-                <div class="form-group">
-                    <input id="without-performer" type="checkbox" checked>
-                    <label class="control-label" for="without-performer">Без исполнителя</label>
-                </div>
-                <h4 class="head-card">Период</h4>
-                <div class="form-group">
-                    <label for="period-value"></label>
-                    <select id="period-value">
-                        <option>1 час</option>
-                        <option>12 часов</option>
-                        <option>24 часа</option>
-                    </select>
-                </div>
-                <input type="button" class="button button--blue" value="Искать">
-            </form>
+<!--            <form>-->
+<!--                <h4 class="head-card">Категории</h4>-->
+<!--                <div class="form-group">-->
+<!--                    <div>-->
+<!--                        <input type="checkbox" id="сourier-services" checked>-->
+<!--                        <label class="control-label" for="сourier-services">Курьерские услуги</label>-->
+<!--                        <input id="cargo-transportation" type="checkbox">-->
+<!--                        <label class="control-label" for="cargo-transportation">Грузоперевозки</label>-->
+<!--                        <input id="translations" type="checkbox">-->
+<!--                        <label class="control-label" for="translations">Переводы</label>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <h4 class="head-card">Дополнительно</h4>-->
+<!--                <div class="form-group">-->
+<!--                    <input id="without-performer" type="checkbox" checked>-->
+<!--                    <label class="control-label" for="without-performer">Без исполнителя</label>-->
+<!--                </div>-->
+<!--                <h4 class="head-card">Период</h4>-->
+<!--                <div class="form-group">-->
+<!--                    <label for="period-value"></label>-->
+<!--                    <select id="period-value">-->
+<!--                        <option>1 час</option>-->
+<!--                        <option>12 часов</option>-->
+<!--                        <option>24 часа</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--                <input type="button" class="button button--blue" value="Искать">-->
+<!--            </form>-->
         </div>
     </div>
 </div>
