@@ -370,7 +370,7 @@ template {
 
 .button--blue {
   background-color: #4d38f5;
-  margin-left: auto;
+  margin-right: auto;
   display: block;
   padding: 15px 40px;}
   .button--blue:hover {

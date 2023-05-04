@@ -1,6 +1,5 @@
 <?php
 namespace app\models;
-use yii\data\ActiveDataProvider;
 use yii\db\ActiveRecord;
 
 /**
@@ -28,19 +27,6 @@ use yii\db\ActiveRecord;
  */
 class Tasks extends ActiveRecord
 {
-    public $withoutexecutor;
-    public $search;
-    public $period;
-
-    public function search($params)
-    {
-        $query = self::find();
-        $dataProvider = new ActiveDataProvider(['query' => $query]);
-        $this->load($params);
-        $query->filterWhere(['category_id' => $this->category_id]);
-        return $dataProvider;
-    }
-
 
     /**
      * {@inheritdoc}
@@ -56,8 +42,8 @@ class Tasks extends ActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'user_id', 'status', 'name', 'details', 'deadline', 'file_id', 'created_at'], 'required'],
-            [['category_id', 'user_id', 'city_id', 'status', 'budget', 'file_id'], 'integer'],
+            [['category_id', 'customer_id', 'status', 'name', 'details', 'deadline', 'file_id', 'created_at'], 'required'],
+            [['category_id', 'customer_id', 'city_id', 'status', 'budget', 'file_id', 'executor_id'], 'integer'],
             [['coordinates'], 'string'],
             [['deadline', 'created_at'], 'safe'],
             [['name', 'address'], 'string', 'max' => 128],
@@ -65,7 +51,8 @@ class Tasks extends ActiveRecord
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::class, 'targetAttribute' => ['category_id' => 'id']],
             [['city_id'], 'exist', 'skipOnError' => true, 'targetClass' => Cities::class, 'targetAttribute' => ['city_id' => 'id']],
             [['file_id'], 'exist', 'skipOnError' => true, 'targetClass' => Files::class, 'targetAttribute' => ['file_id' => 'id']],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::class, 'targetAttribute' => ['user_id' => 'id']],
+            [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::class, 'targetAttribute' => ['customer_id' => 'id']],
+            [['executor_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::class, 'targetAttribute' => ['executor_id' => 'id']],
         ];
     }
 
@@ -77,7 +64,7 @@ class Tasks extends ActiveRecord
         return [
             'id' => 'ID',
             'category_id' => 'Category ID',
-            'user_id' => 'User ID',
+            'customer_id' => 'User ID',
             'city_id' => 'City ID',
             'coordinates' => 'Coordinates',
             'status' => 'Status',
@@ -88,6 +75,7 @@ class Tasks extends ActiveRecord
             'file_id' => 'File ID',
             'created_at' => 'Created At',
             'address' => 'Address',
+            'executor_id' => 'Executor Id',
         ];
     }
 
@@ -132,13 +120,23 @@ class Tasks extends ActiveRecord
     }
 
     /**
-     * Gets query for [[User]].
+     * Gets query for [[Customers]].
      *
      * @return \yii\db\ActiveQuery|UsersQuery
      */
-    public function getUser()
+    public function getCustomers()
     {
-        return $this->hasOne(Users::class, ['id' => 'user_id']);
+        return $this->hasOne(Users::class, ['id' => 'customer_id']);
+    }
+
+    /**
+     * Gets query for [[Executors]].
+     *
+     * @return \yii\db\ActiveQuery|UsersQuery
+     */
+    public function getExecutors()
+    {
+        return $this->hasOne(Users::class, ['id' => 'executor_id']);
     }
 
     /**
